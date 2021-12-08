@@ -1,7 +1,7 @@
 package com.adra.educate.controller;
 
 import com.adra.educate.entity.BancosComunal;
-import com.adra.educate.service.implementation.BancosComunalServiceImp;
+import com.adra.educate.service.BancosComunalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,19 +11,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("bancosComunal")
 public class BancosComunalController {
 
     @Autowired
-    private BancosComunalServiceImp bancosComunalServiceImp;
+    private BancosComunalService bancosComunalService;
 
 
     @GetMapping("/")
     public ResponseEntity<?> findAll(){
         Map<String, Object> response = new HashMap<>();
 
-        List<BancosComunal> bancosComunals = bancosComunalServiceImp.listBancoComunal();
+        List<BancosComunal> bancosComunals = bancosComunalService.listBancoComunal();
         response.put("message", "success");
         response.put("error", "false");
         response.put("body", bancosComunals);
@@ -34,7 +35,7 @@ public class BancosComunalController {
     public ResponseEntity<?> findById(@PathVariable("id") int idBancoComunal){
         Map<String, Object> response = new HashMap<>();
 
-        return bancosComunalServiceImp.findBancoComunal(idBancoComunal).map(banco -> {
+        return bancosComunalService.findBancoComunal(idBancoComunal).map(banco -> {
             response.put("message", "success");
             response.put("error", "false");
             response.put("body", banco);
@@ -44,7 +45,7 @@ public class BancosComunalController {
 
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody BancosComunal bancosComunal){
-        BancosComunal bancosComunal1 = bancosComunalServiceImp.saveBancoComunal(bancosComunal);
+        BancosComunal bancosComunal1 = bancosComunalService.saveBancoComunal(bancosComunal);
         return new ResponseEntity<>(bancosComunal1, HttpStatus.CREATED);
     }
 
@@ -54,7 +55,7 @@ public class BancosComunalController {
         response.put("message", "success");
         response.put("error", "false");
         response.put("body", "actualizado correctamente");
-        bancosComunalServiceImp.updateBancoComunal(idBancoComunal, bancosComunal);
+        bancosComunalService.updateBancoComunal(idBancoComunal, bancosComunal);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -64,7 +65,7 @@ public class BancosComunalController {
         response.put("message", "success");
         response.put("error", "false");
         response.put("body", "eliminado correctamente");
-        bancosComunalServiceImp.deleteBancoComunal(idBancoComunal);
+        bancosComunalService.deleteBancoComunal(idBancoComunal);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

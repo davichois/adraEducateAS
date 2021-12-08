@@ -1,32 +1,28 @@
 package com.adra.educate.controller;
 
-import com.adra.educate.entity.Categoria;
 import com.adra.educate.entity.PedidosOracion;
-import com.adra.educate.service.implementation.PedidosOracionServiceImp;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.adra.educate.service.PedidosOracionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.*;
 
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("pedidosOracion")
 public class PedidosOracionController {
 
     @Autowired
-    private PedidosOracionServiceImp pedidosOracionServiceImp;
+    private PedidosOracionService pedidosOracionService;
+
 
     @GetMapping("/")
     public ResponseEntity<?> findAll(){
         Map<String, Object> response = new HashMap<>();
 
-        List<PedidosOracion> pedidosOracion = pedidosOracionServiceImp.listPedidosOracion();
+        List<PedidosOracion> pedidosOracion = pedidosOracionService.listPedidosOracion();
         response.put("message", "success");
         response.put("error", "false");
         response.put("body", pedidosOracion);
@@ -37,7 +33,7 @@ public class PedidosOracionController {
     public ResponseEntity<?> findById(@PathVariable("id") Integer idPedidosOracion){
         Map<String, Object> response = new HashMap<>();
 
-        return pedidosOracionServiceImp.findPedidosOracion(idPedidosOracion).map(pedido -> {
+        return pedidosOracionService.findPedidosOracion(idPedidosOracion).map(pedido -> {
             response.put("message", "success");
             response.put("error", "false");
             response.put("body", pedido);
@@ -47,16 +43,16 @@ public class PedidosOracionController {
 
     @PostMapping("/")
     public ResponseEntity<PedidosOracion> create(@RequestBody PedidosOracion pedidosOracion){
-        return new ResponseEntity<>(pedidosOracionServiceImp.savePedidosOracion(pedidosOracion), HttpStatus.CREATED);
+        return new ResponseEntity<>(pedidosOracionService.savePedidosOracion(pedidosOracion), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public Optional<ResponseEntity<PedidosOracion>> update(@RequestBody PedidosOracion pedidosOracion, @PathVariable("id") Integer idPedidosOracion) {
-        return this.pedidosOracionServiceImp.findPedidosOracion(idPedidosOracion).map(pedido -> {
+        return this.pedidosOracionService.findPedidosOracion(idPedidosOracion).map(pedido -> {
             pedido.setDeContenido(pedidosOracion.getDeContenido());
             pedido.setEsPedido(pedidosOracion.getEsPedido());
             pedido.setPersona(pedido.getPersona());
-            PedidosOracion resPedido = this.pedidosOracionServiceImp.savePedidosOracion(pedido);
+            PedidosOracion resPedido = this.pedidosOracionService.savePedidosOracion(pedido);
             return new ResponseEntity<>(resPedido, HttpStatus.OK);
         });
     }

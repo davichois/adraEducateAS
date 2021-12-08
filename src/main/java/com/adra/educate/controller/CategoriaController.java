@@ -1,7 +1,7 @@
 package com.adra.educate.controller;
 
 import com.adra.educate.entity.Categoria;
-import com.adra.educate.service.implementation.CategoriaServiceImp;
+import com.adra.educate.service.CategoriaService;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,19 +14,20 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.*;
 
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("categoria")
 public class CategoriaController {
 
     @Autowired
-    private CategoriaServiceImp categoriaServiceImp;
+    private CategoriaService categoriaService;
 
 
     @GetMapping("/")
     public ResponseEntity<?> findAll(){
         Map<String, Object> response = new HashMap<>();
 
-        List<Categoria> categorias = categoriaServiceImp.listCategoria();
+        List<Categoria> categorias = categoriaService.listCategoria();
         response.put("message", "success");
         response.put("error", "false");
         response.put("body", categorias);
@@ -37,7 +38,7 @@ public class CategoriaController {
     public ResponseEntity<?> findById(@PathVariable("id") Integer idCategoria){
         Map<String, Object> response = new HashMap<>();
 
-        return categoriaServiceImp.findCategoria(idCategoria).map(categoria -> {
+        return categoriaService.findCategoria(idCategoria).map(categoria -> {
             response.put("message", "success");
             response.put("error", "false");
             response.put("body", categoria);
@@ -47,7 +48,7 @@ public class CategoriaController {
 
     @PostMapping("/")
     public ResponseEntity<Categoria> create(@RequestBody Categoria categoria){
-        return new ResponseEntity<>(categoriaServiceImp.saveCategoria(categoria), HttpStatus.CREATED);
+        return new ResponseEntity<>(categoriaService.saveCategoria(categoria), HttpStatus.CREATED);
     }
 
     @PostMapping("/excell")
@@ -73,7 +74,7 @@ public class CategoriaController {
         }
 
         for (Categoria data: categoriaList){
-            Categoria categoria = categoriaServiceImp.saveCategoria(data);
+            Categoria categoria = categoriaService.saveCategoria(data);
             saveCategoria.add(categoria);
         }
 
@@ -86,10 +87,10 @@ public class CategoriaController {
 
     @PutMapping("/{id}")
     public Optional<ResponseEntity<Categoria>> update(@RequestBody Categoria categoria, @PathVariable("id") Integer idCategoria) {
-        return this.categoriaServiceImp.findCategoria(idCategoria).map(category -> {
+        return this.categoriaService.findCategoria(idCategoria).map(category -> {
             category.setNoCategoria(categoria.getNoCategoria());
             category.setCapacitacions(category.getCapacitacions());
-            Categoria resCategory = this.categoriaServiceImp.saveCategoria(category);
+            Categoria resCategory = this.categoriaService.saveCategoria(category);
             return new ResponseEntity<>(resCategory, HttpStatus.OK);
         });
     }

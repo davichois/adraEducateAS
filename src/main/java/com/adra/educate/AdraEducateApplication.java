@@ -14,7 +14,6 @@ public class AdraEducateApplication {
 		SpringApplication.run(AdraEducateApplication.class, args);
 	}
 
-
 	@Bean
 	public OpenAPI springEmployeeOpenAPI() {
 		return new OpenAPI()

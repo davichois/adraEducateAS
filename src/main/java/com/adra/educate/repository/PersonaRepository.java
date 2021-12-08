@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PersonaRepository extends JpaRepository<Persona, Integer> {
 
-    @Query(value = "CALL SP_LIST_PERSONA", nativeQuery = true)
+    @Query(value = "CALL SP_LIST_PERSONA;", nativeQuery = true)
     List<Persona> listPersona();
 
     @Query(value = "CALL SP_INS_PERSONA(:noPersona, :apPaterno, :apMaterno, :nuTelefono, :nuDNI, :diPersona, :tiSexo, :idBancoComunal)", nativeQuery = true)

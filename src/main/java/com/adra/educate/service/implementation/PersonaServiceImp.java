@@ -24,6 +24,7 @@ public class PersonaServiceImp implements PersonaService {
     public Persona savePersona(Persona persona) {
         return personaRepository.savePersona(persona.getNoPersona(), persona.getApPaterno(), persona.getApMaterno(),
                 persona.getNuTelefono(), persona.getNuDNI(), persona.getDiPersona(), persona.getTiSexo(), persona.getIdBancoComunal());
+        // usuarioService.saveUsuario(persona.getNuDNI(), persona.getNuDNI());
     }
 
     @Override
