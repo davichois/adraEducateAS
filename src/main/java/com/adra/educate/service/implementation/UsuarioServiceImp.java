@@ -75,10 +75,11 @@ public class UsuarioServiceImp implements UsuarioService, UserDetailsService {
         return usuarioRespository.findAll();
     }
 
+
     @Override
-    public Usuario saveUsuario(String usuCredencial, String pwdCredencial) {
+    public Usuario saveUsuario(Integer idUsuPersona, String usuCredencial, String pwdCredencial) {
         log.info("Usuario nuevo agregado {}", usuCredencial);
-        return usuarioRespository.saveUsuario(usuCredencial, passwordEncoder.encode(pwdCredencial));
+        return usuarioRespository.saveUsuario(idUsuPersona, usuCredencial, passwordEncoder.encode(pwdCredencial));
     }
 
     @Override

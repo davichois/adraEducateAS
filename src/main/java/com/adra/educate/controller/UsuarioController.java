@@ -44,7 +44,7 @@ public class UsuarioController {
 
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody Usuario usuario){
-        usuarioService.saveUsuario(usuario.getUsuCredencial(), usuario.getPwdCredencial());
+        usuarioService.saveUsuario(usuario.getIdUsuPersona(), usuario.getUsuCredencial(), usuario.getPwdCredencial());
         return ResponseEntity.ok().build();
     }
 

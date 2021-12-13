@@ -13,7 +13,7 @@ public interface UsuarioService {
 
     List<Usuario> listUsuario();
 
-    Usuario saveUsuario(String usuCredencial, String pwdCredencial);
+    Usuario saveUsuario(Integer idUsuPersona, String usuCredencial, String pwdCredencial);
 
     List<UsuarioReport> findAllSocio();
 

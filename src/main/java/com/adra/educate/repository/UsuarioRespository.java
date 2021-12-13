@@ -9,7 +9,7 @@ public interface UsuarioRespository extends JpaRepository<Usuario, Integer> {
 
     Usuario findByUsuCredencial(String usuCredencial);
 
-    @Query(value = "CALL SP_INS_USUARIO(:usuCredencial, :pwdCredencial)", nativeQuery = true)
-    Usuario saveUsuario(@Param("usuCredencial") String usuCredencial, @Param("pwdCredencial") String pwdCredencial);
+    @Query(value = "CALL SP_INS_USUARIO(:idUsuPersona, :usuCredencial, :pwdCredencial)", nativeQuery = true)
+    Usuario saveUsuario(@Param("idUsuPersona") int idUsuPersona, @Param("usuCredencial") String usuCredencial, @Param("pwdCredencial") String pwdCredencial);
 
 }

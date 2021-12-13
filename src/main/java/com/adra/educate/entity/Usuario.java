@@ -32,8 +32,7 @@ public class Usuario implements Serializable {
             },
             inverseJoinColumns = {
                 @JoinColumn(name = "ID_USR_ROL", foreignKey = @ForeignKey(name = "FK_USR_ROL"))
-            },
-            uniqueConstraints = {@UniqueConstraint(columnNames = {"ID_USR_USUARIO", "ID_USR_ROL"})}
+            }
     )
     private Collection<Rol> rols = new ArrayList<>();
 
