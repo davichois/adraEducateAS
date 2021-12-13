@@ -33,6 +33,7 @@ public class Recurso {
     @JoinColumn(name = "ID_REC_TIPODOC", foreignKey = @ForeignKey(name = "FK_REC_TIPODOC"), insertable = false, updatable = false)
     private TiposRecurso tipoRecurso;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "idRecSala")
     private RecSala recSala;
 
