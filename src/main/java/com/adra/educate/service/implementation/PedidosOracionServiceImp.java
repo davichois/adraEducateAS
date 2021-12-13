@@ -1,6 +1,8 @@
 package com.adra.educate.service.implementation;
 
 import com.adra.educate.entity.PedidosOracion;
+import com.adra.educate.entity.PedidosOracionReport;
+import com.adra.educate.repository.PedidoOracionReportRepository;
 import com.adra.educate.repository.PedidosOracionRepository;
 import com.adra.educate.service.PedidosOracionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class PedidosOracionServiceImp implements PedidosOracionService {
 
     @Autowired
     private PedidosOracionRepository pedidosOracionRepository;
+    @Autowired
+    private PedidoOracionReportRepository pedidoOracionReportRepository;
 
 
     @Override
@@ -34,5 +38,10 @@ public class PedidosOracionServiceImp implements PedidosOracionService {
     @Override
     public void deletePedidosOracion(Integer idPedidoOracion) {
 
+    }
+
+    @Override
+    public List<PedidosOracionReport> listPedidosOracionResport() {
+        return pedidoOracionReportRepository.findAllPedidosOracionReport();
     }
 }

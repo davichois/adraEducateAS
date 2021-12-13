@@ -1,6 +1,8 @@
 package com.adra.educate.service.implementation;
 
 import com.adra.educate.entity.BancosComunal;
+import com.adra.educate.entity.BancosComunalReport;
+import com.adra.educate.repository.BancosComunalReportRespository;
 import com.adra.educate.repository.BancosComunalRepository;
 import com.adra.educate.service.BancosComunalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class BancosComunalServiceImp implements BancosComunalService {
 
     @Autowired
     private BancosComunalRepository bancosComunalRepository;
+    @Autowired
+    private BancosComunalReportRespository bancosComunalReportRespository;
 
 
     @Override
@@ -39,5 +43,10 @@ public class BancosComunalServiceImp implements BancosComunalService {
     @Override
     public BancosComunal deleteBancoComunal(Integer idBancoComunal) {
         return bancosComunalRepository.deleteBancoComunal(idBancoComunal);
+    }
+
+    @Override
+    public List<BancosComunalReport> listBancosComunalReport() {
+        return bancosComunalReportRespository.findAllBancosComunalReport();
     }
 }

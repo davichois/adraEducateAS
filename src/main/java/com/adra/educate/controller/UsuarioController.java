@@ -6,6 +6,7 @@ import com.adra.educate.service.UsuarioService;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,11 @@ public class UsuarioController {
     @GetMapping("/statistics")
     public List<UsuarioReport> findAllReport(){
         return usuarioService.findAllSocio();
+    }
+
+    @GetMapping("/{credencial}")
+    public Usuario findByCredecialInfo(@Param("credencial") String credencial){
+        return usuarioService.findByCredencial(credencial);
     }
 
     @PostMapping("/rol/addtousuario")

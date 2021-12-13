@@ -16,6 +16,9 @@ public interface CapacitacionRepository extends JpaRepository<Capacitacion, Inte
     @Query(value = "CALL SP_LIST_CAPACITACION", nativeQuery = true)
     List<Capacitacion> listCapacitacion();
 
+    @Query(value = "CALL SP_LIST_CAPACITACION_BY_ID(:nuDNI)", nativeQuery = true)
+    List<Capacitacion> listCapacitacionBancoComunalUsuario(@Param("nuDNI") String nuDNI);
+
     @Query(value = "CALL SP_BUSCAR_CAPACITACION(:idCapacitacion)", nativeQuery = true)
     Optional<Capacitacion> findCapacitacion(@Param("idCapacitacion") int idCapacitacion);
 

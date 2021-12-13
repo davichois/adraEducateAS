@@ -1,8 +1,8 @@
 package com.adra.educate.controller;
 
 import com.adra.educate.entity.Persona;
+import com.adra.educate.entity.PersonaReport;
 import com.adra.educate.service.PersonaService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +25,23 @@ public class PersonaController {
     public ResponseEntity<?> findAll(){
         Map<String, Object> response = new HashMap<>();
 
-        List<Persona> usuarioDTOS = personaService.listPersona();
+        List<Persona> personas = personaService.listPersona();
 
         response.put("message", "success");
         response.put("error", "false");
-        response.put("body", usuarioDTOS);
+        response.put("body", personas);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<?> findAllPersonaReport(){
+        Map<String, Object> response = new HashMap<>();
+
+        List<PersonaReport> personasReports = personaService.listPersonaReport();
+
+        response.put("message", "success");
+        response.put("error", "false");
+        response.put("body", personasReports);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
 

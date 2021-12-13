@@ -49,7 +49,6 @@ public class Capacitacion {
     @JoinColumn(name = "ID_CAP_CATEGORIA", foreignKey = @ForeignKey(name = "FK_CAP_CATEGORIA"), insertable = false, updatable = false)
     private Categoria categoria;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "capacitacion")
     private List<Sesion> sesions;
 

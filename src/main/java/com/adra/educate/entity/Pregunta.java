@@ -1,5 +1,6 @@
 package com.adra.educate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Pregunta {
     @Column(name = "ID_PRE_REC")
     private Integer idPreRec;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_PRE_REC", foreignKey = @ForeignKey(name = "FK_PRE_REC"), insertable = false, updatable = false)
     private Recurso recurso;

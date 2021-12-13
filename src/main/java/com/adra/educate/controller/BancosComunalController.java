@@ -1,6 +1,8 @@
 package com.adra.educate.controller;
 
 import com.adra.educate.entity.BancosComunal;
+import com.adra.educate.entity.BancosComunalReport;
+import com.adra.educate.entity.PersonaReport;
 import com.adra.educate.service.BancosComunalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,18 @@ public class BancosComunalController {
         response.put("error", "false");
         response.put("body", bancosComunals);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<?> findAllBancosComunalReport(){
+        Map<String, Object> response = new HashMap<>();
+
+        List<BancosComunalReport> bancosComunalReports = bancosComunalService.listBancosComunalReport();
+
+        response.put("message", "success");
+        response.put("error", "false");
+        response.put("body", bancosComunalReports);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

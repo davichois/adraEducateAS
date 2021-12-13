@@ -1,6 +1,7 @@
 package com.adra.educate.controller;
 
 import com.adra.educate.entity.PedidosOracion;
+import com.adra.educate.entity.PedidosOracionReport;
 import com.adra.educate.service.PedidosOracionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,18 @@ public class PedidosOracionController {
         response.put("message", "success");
         response.put("error", "false");
         response.put("body", pedidosOracion);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<?> findAllPedidosOracionReport(){
+        Map<String, Object> response = new HashMap<>();
+
+        List<PedidosOracionReport> pedidosOracionReports = pedidosOracionService.listPedidosOracionResport();
+
+        response.put("message", "success");
+        response.put("error", "false");
+        response.put("body", pedidosOracionReports);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
 

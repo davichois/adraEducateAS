@@ -1,6 +1,8 @@
 package com.adra.educate.service.implementation;
 
 import com.adra.educate.entity.Capacitacion;
+import com.adra.educate.entity.CapacitacionReport;
+import com.adra.educate.repository.CapacitacionReportRepository;
 import com.adra.educate.repository.CapacitacionRepository;
 import com.adra.educate.service.CapacitacionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,18 @@ public class CapacitacionServiceImp implements CapacitacionService {
 
     @Autowired
     private CapacitacionRepository capacitacionRepository;
+    @Autowired
+    private CapacitacionReportRepository capacitacionReportRepository;
 
 
     @Override
     public List<Capacitacion> listCapacitacion() {
         return capacitacionRepository.listCapacitacion();
+    }
+
+    @Override
+    public List<Capacitacion> listCapacitacionBancoComunalUsuario(String nuDni) {
+        return capacitacionRepository.listCapacitacionBancoComunalUsuario(nuDni);
     }
 
     @Override
@@ -42,5 +51,10 @@ public class CapacitacionServiceImp implements CapacitacionService {
     @Override
     public Capacitacion deleteCapacitacion(Integer idCapacitacion) {
         return capacitacionRepository.deleteCapacitacion(idCapacitacion);
+    }
+
+    @Override
+    public List<CapacitacionReport> listCapacitacionReport() {
+        return capacitacionReportRepository.findAllCapacitacionReport();
     }
 }

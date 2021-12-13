@@ -1,9 +1,12 @@
 package com.adra.educate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Data
 @Entity
@@ -30,7 +33,21 @@ public class Sesion {
     @Column(name = "ID_SES_CAPACITACION")
     private Integer idSesCapacitacion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "TMV_SS_RE",
+        joinColumns = {
+            @JoinColumn(name = "ID_SR_SESION", foreignKey = @ForeignKey(name = "FK_SR_SESION"), insertable = false, updatable = false)
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "ID_SR_RECURSO", foreignKey = @ForeignKey(name = "FK_SR_RECURSO"), insertable = false, updatable = false)
+        },
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"ID_SR_SESION", "ID_SR_RECURSO"})}
+    )
+    private Collection<Recurso> recursos = new ArrayList<>();
+
+    @JsonIgnore
+    @ManyToOne()
     @JoinColumn(name = "ID_SES_CAPACITACION", foreignKey = @ForeignKey(name = "FK_SES_CAPACITACION"), insertable = false, updatable = false)
     private Capacitacion capacitacion;
 

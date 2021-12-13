@@ -1,6 +1,8 @@
 package com.adra.educate.controller;
 
 import com.adra.educate.entity.Capacitacion;
+import com.adra.educate.entity.CapacitacionReport;
+import com.adra.educate.entity.PersonaReport;
 import com.adra.educate.service.CapacitacionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,29 @@ public class CapacitacionController {
         Map<String, Object> response = new HashMap<>();
 
         List<Capacitacion> capacitacions = capacitacionService.listCapacitacion();
+        response.put("message", "success");
+        response.put("error", "false");
+        response.put("body", capacitacions);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<?> findAllCapacitacionReport(){
+        Map<String, Object> response = new HashMap<>();
+
+        List<CapacitacionReport> capacitacionReports = capacitacionService.listCapacitacionReport();
+
+        response.put("message", "success");
+        response.put("error", "false");
+        response.put("body", capacitacionReports);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/bcu/{nuDNI}")
+    public ResponseEntity<?> findAllCapacitacionBancoUsuario(@PathVariable("nuDNI") String nuDNI){
+        Map<String, Object> response = new HashMap<>();
+
+        List<Capacitacion> capacitacions = capacitacionService.listCapacitacionBancoComunalUsuario(nuDNI);
         response.put("message", "success");
         response.put("error", "false");
         response.put("body", capacitacions);

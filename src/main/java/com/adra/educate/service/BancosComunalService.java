@@ -1,7 +1,9 @@
 package com.adra.educate.service;
 
 import com.adra.educate.entity.BancosComunal;
+import com.adra.educate.entity.BancosComunalReport;
 import com.adra.educate.entity.Capacitacion;
+import com.adra.educate.entity.PersonaReport;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,5 +19,7 @@ public interface BancosComunalService {
     BancosComunal updateBancoComunal(Integer idBancoComunal, BancosComunal bancosComunal);
 
     BancosComunal deleteBancoComunal(Integer idBancoComunal);
+
+    List<BancosComunalReport> listBancosComunalReport();
 
 }
