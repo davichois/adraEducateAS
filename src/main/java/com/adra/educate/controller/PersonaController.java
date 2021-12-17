@@ -60,4 +60,14 @@ public class PersonaController {
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int idPersona){
+        Map<String, Object> response = new HashMap<>();
+        Persona persona = personaService.deletePersona(idPersona);
+        response.put("message", "success");
+        response.put("error", "false");
+        response.put("body", persona);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+
 }

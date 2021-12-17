@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Immutable
-@Table(name = "VIEW_PEDIDO_ORACION", uniqueConstraints = @UniqueConstraint(columnNames = {"id_pedido"}))
+@Table(name = "VW_PEDIDO_ORACION", uniqueConstraints = @UniqueConstraint(columnNames = {"id_pedido"}))
 @Data
 public class PedidosOracionReport {
 

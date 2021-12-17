@@ -45,4 +45,9 @@ public class PersonaServiceImp implements PersonaService {
         return personaReportRepository.findAllPersonaReport();
     }
 
+    @Override
+    public Persona deletePersona(Integer idPersona) {
+        return personaRepository.deletePersona(idPersona);
+    }
+
 }

@@ -24,4 +24,7 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer> {
             @Param("nuTelefono") String nuTelefono,  @Param("diPersona") String diPersona,   @Param("tiSexo") char tiSexo,            @Param("idBancoComunal") int idBancoComunal
     );
 
+    @Query(value = "CALL SP_DEL_PERSONA(:idPersona)", nativeQuery = true)
+    Persona deletePersona(@Param("idPersona") int idPersona);
+
 }

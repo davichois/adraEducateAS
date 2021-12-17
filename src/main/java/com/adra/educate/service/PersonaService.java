@@ -15,4 +15,6 @@ public interface PersonaService {
 
     List<PersonaReport> listPersonaReport();
 
+    Persona deletePersona(Integer idPersona);
+
 }

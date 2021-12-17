@@ -16,7 +16,7 @@ public class PersonaReport {
     private Integer idPersona;
 
     @Column(name = "no_persona")
-    private String no_persona;
+    private String noPersona;
 
     @Column(name = "nu_dni")
     private String nuDni;

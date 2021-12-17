@@ -37,6 +37,7 @@ public class Recurso {
     @OneToOne(mappedBy = "idRecSala")
     private RecSala recSala;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "recurso")
     private List<Pregunta> preguntas;
 
